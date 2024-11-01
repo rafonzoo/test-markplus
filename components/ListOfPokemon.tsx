@@ -23,7 +23,6 @@ const ListOfPokemons: FC<{
 }> = ({ pokemons: initialList, onQueryChanged }) => {
   const [query, setQuery] = useState('')
   const [sortBy, setSortBy] = useState<(typeof sorted)[number]['value']>('none')
-  const lastScrollY = useRef(0)
   const pokemons = initialList.filter((item) =>
     item.name.startsWith(query.toLowerCase())
   )
@@ -36,9 +35,6 @@ const ListOfPokemons: FC<{
             ? a.name.localeCompare(b.name)
             : b.name.localeCompare(a.name)
         )
-
-  // Stick to the current scroll
-  useEffect(() => window.scroll({ top: lastScrollY.current }), [sortBy])
 
   return (
     <div>
@@ -65,10 +61,7 @@ const ListOfPokemons: FC<{
               id='sortBy'
               value={sortBy}
               className='text-blue-600'
-              onChange={(e) => {
-                setSortBy(e.target.value as 'none')
-                lastScrollY.current = window.scrollY
-              }}
+              onChange={(e) => setSortBy(e.target.value as 'none')}
             >
               {sorted.map(({ value, label }) => (
                 <option key={value} value={value}>
