@@ -24,7 +24,10 @@ const ListOfPokemons: FC<{
   const [query, setQuery] = useState('')
   const [sortBy, setSortBy] = useState<(typeof sorted)[number]['value']>('none')
   const lastScrollY = useRef(0)
-  const pokemons = initialList.filter((item) => item.name.startsWith(query))
+  const pokemons = initialList.filter((item) =>
+    item.name.startsWith(query.toLowerCase())
+  )
+
   const pokemonSorted =
     sortBy === 'none'
       ? pokemons
