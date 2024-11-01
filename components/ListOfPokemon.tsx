@@ -1,5 +1,5 @@
+import { FC, useState } from 'react'
 import { Pokemons } from '@/pages'
-import { FC, memo, useEffect, useRef, useState } from 'react'
 import PokemonItem from './PokemonItem'
 
 const sorted = [
@@ -90,4 +90,4 @@ const ListOfPokemons: FC<{
   )
 }
 
-export default memo(ListOfPokemons)
+export default ListOfPokemons

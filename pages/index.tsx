@@ -26,7 +26,7 @@ export default function Home({
   })
 
   useEffect(() => {
-    if (!loadingRef.current) return
+    if (!loadingRef.current || !showMore) return
 
     const observer = new IntersectionObserver((entries, cb) => {
       entries.forEach((entry) => {
@@ -45,7 +45,7 @@ export default function Home({
 
     observer.observe(loadingRef.current)
     return () => observer.disconnect()
-  }, [nextUrl])
+  }, [showMore, nextUrl])
 
   async function getPokemonData(url: string) {
     const delay = await new Promise((res) => setTimeout(res, 1000))
